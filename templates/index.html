@@ -1,0 +1,37 @@
+{% extends 'main.html' %}
+{% block title %}
+<title>Home page</title>
+{% endblock title %}
+{% block body %}
+{% for message in messages %}
+<div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+  <strong>Message</strong> {{message}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor%}
+<h1 class='container'>Home page</h1>
+<div class="container">
+
+<div class="row mb-2 ">
+{% for emailspam in emailspams %}
+    <div class="col-md-6">
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+         
+          <h3 class="mb-0">{{emailspam.title}}</h3>
+          <div class="mb-1 text-muted">{{emailspam.date_time}}
+          </div>
+          
+          <p class="card-text text-muted">{{emailspam.content}}</p>
+             <h5>Author:{{emailspam.user_id}}</h5>
+            
+             <a href="emailspam_detail/{{emailspam.id}}" class="stretched-link btn btn-primary">continue Reading</a>
+           </div>
+            
+         </div>
+         
+    </div>
+    {% endfor %} 
+    </div>
+    </div>
+  {% endblock body%}

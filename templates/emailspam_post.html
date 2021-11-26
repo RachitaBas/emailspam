@@ -1,0 +1,28 @@
+{% extends 'main.html' %}
+{% block title %}
+<title>Emailspam Page</title>
+{% endblock title %}
+{% block body %}
+{% for message in messages %}
+<div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+  <strong>Message</strong> {{message}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor%}
+<h1 class='container'>Emailspam Page</h1>
+<form action='emailspampost' method='POST'>
+{% csrf_token%}
+<div class="container">
+<div class="form-group">
+<div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">title</label>
+  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Title" name='title'>
+</div>
+<div class="mb-3">
+  <label for="exampleFormControlTextarea1" class="form-label">content</label>
+  <textarea class="form-control" id="exampleFormControlTextarea1" name='content' rows="3"></textarea>
+</div>
+<input type='submit' value='POST' class='btn btn-primary'>
+</form>
+</div>
+{% endblock body%}
