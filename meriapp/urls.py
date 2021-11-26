@@ -25,4 +25,5 @@ urlpatterns = [
     path('logout',views.logout_user,name='logout'),
     path('emailspampost',views.emailspampost,name='emailspampost'),
     path('emailspam_detail/<int:id>',views.emailspam_detail,name='emailspam_detail'),
+    path('contact_form',views.Contact_form,name='contact_form'),
 ]
