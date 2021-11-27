@@ -5,7 +5,8 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.contrib.auth.models import User
 from .models import  Emailspam
-from .forms import Contact
+from .forms import contact_form
+from django.core.mail import send_mail
 
 # Create your views here.
 def index(request):
@@ -28,8 +29,13 @@ def register(request):
           user=User(email=email,password=password,first_name=firstname,last_name=lastname,username=username)
           user.set_password(password)
           user.save()
+          subject='About registration'
+          message= 'Hi {uname}, You have been registered succesfully.'
+          email_from='rachita.basnet09@gmail.com'
+          rec_list=[email,]
+          send_mail(subject,message,email_from,rec_list)
           messages.success(request, 'user has been registered successfully')
-          return redirect('/')
+          return redirect('login')
     return render(request,'register.html')
 def login_user(request):
   if request.method=='POST':
@@ -65,11 +71,12 @@ def emailspam_detail(request,id):
   return render(request,'emailspam_detail.html',{'emailspam':emailspam})
 
 def Contact_form(request):
-   form=Contact()
-    # if request.method=='POST':
-    #   form=contact_form(request.POST)
-    #   if form.is_valid():
-    #     form.save()
-    #     messages.success(request,'thankyou for your feedback')
-    #     return redirect('/')
+   form=contact_form()
+   if request.method=='POST':
+      form=contact_form(request.POST)
+      if form.is_valid():
+        form.save()
+        messages.success(request,'thankyou for your feedback')
+        return redirect('/')
    return render(request,'contact_form.html',{'form':form})
+  
