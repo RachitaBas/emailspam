@@ -31,7 +31,7 @@ def register(request):
           user.save()
           subject='About registration'
           message= 'Hi {uname}, You have been registered succesfully.'
-          email_from='rachita.basnet09@gmail.com'
+          email_from='sender_list'
           rec_list=[email,]
           send_mail(subject,message,email_from,rec_list)
           messages.success(request, 'user has been registered successfully')
